@@ -11,7 +11,11 @@ config_str = json.dumps(config)
 M_SIZE = 1024
 
 # Serverのアドレスを用意。Serverのアドレスは確認しておく必要がある。
-serv_address = ('127.0.0.1', 8890)
+# serv_address = ('127.0.0.1', 8890)
+address = config["sv_ip"]
+port = config["sv_port"]
+# serv_address = ('192.168.11.5', 8890)
+serv_address = (address, port)
 
 # ①ソケットを作成する
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -19,7 +23,8 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 while True:
     try:
         # ②messageを送信する
-        print('Input any messages, Type [end] to exit')
+        # print('Input any messages, Type [end] to exit')
+        print('sending message')
         # message = input()
         message = config_str
         if message != 'end':
@@ -34,7 +39,7 @@ while True:
 
             # TODO: Webにアクセス
             dict_meesage = json.loads(rx_meesage)
-            url = dict_meesage["url"]
+            url = dict_meesage["url"][:-1] + "?cp-id=" + dict_meesage["cp-id"]
             webbrowser.open(url)
 
             break
