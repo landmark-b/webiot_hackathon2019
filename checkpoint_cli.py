@@ -24,7 +24,7 @@ while True:
     try:
         # ②messageを送信する
         # print('Input any messages, Type [end] to exit')
-        print('sending message')
+        print(f'sending message to {address}, {port}')
         # message = input()
         message = config_str
         if message != 'end':

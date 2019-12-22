@@ -8,7 +8,8 @@ from datetime import datetime
 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-
+import matplotlib
+matplotlib.use('Agg')
 
 M_SIZE = 1024
 
@@ -63,7 +64,7 @@ while True:
         image_name = take_camera_pict()
 
         # show current picture
-        show_pict(image_name)
+        # show_pict(image_name)
         
     except KeyboardInterrupt:
         print ('\n . . .\n')
