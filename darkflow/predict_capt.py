@@ -1,6 +1,7 @@
 from darkflow.net.build import TFNet
 import cv2
 import numpy as np
+import capt_picamera
 
 options = {"model": "cfg/yolov2-tiny-voc.cfg", "load": "bin/yolov2-tiny-voc.weights", "threshold": 0.1}
 
@@ -11,7 +12,11 @@ class_names = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle',
               'dog', 'horse', 'motorbike', 'person', 'pottedplant',
               'sheep', 'sofa', 'train', 'tvmonitor']
 
-imgcv = cv2.imread("./sample_img/20191221195853.jpg")
+# Capture by picamera
+image_file_name = capt_picamera.take_camera_pict  
+
+# imgcv = cv2.imread("./sample_img/20191221195853.jpg")
+imgcv = cv2.imread(image_file_name)
 result = tfnet.return_predict(imgcv)
 print(result)
 
@@ -51,4 +56,4 @@ for item in result:
         cv2.putText(imgcv, text, (tlx, tly), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1)
 
 # 書き出し
-cv2.imwrite("./sample_img/sampeeeeeeeee.jpg", imgcv)
+cv2.imwrite("./sample_img/" + image_file_name + "_predict.jpg", imgcv)
