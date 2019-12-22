@@ -8,13 +8,15 @@ from datetime import datetime
 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
+import matplotlib
 
+#matplotlib.use('Agg')
 
 M_SIZE = 1024
 
 # 
 # host = '127.0.0.1'
-host = '192.168.11.5'
+host = '192.168.11.90'
 port = 8890
 
 locaddr = (host, port)
@@ -26,9 +28,10 @@ config = json.loads(config)
 config_str = json.dumps(config)
 
 sock = socket.socket(socket.AF_INET, type=socket.SOCK_DGRAM)
-print('create socket')
+print('create socket {}, {}'.format(host, port))
 
-sock.bind(locaddr)
+#sock.bind(locaddr)
+sock.bind((host, port))
 
 def take_camera_pict():
     with picamera.PiCamera() as camera:
